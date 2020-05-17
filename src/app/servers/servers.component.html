@@ -1,0 +1,52 @@
+
+<label>Server name</label>
+<!-- <input type="text" class="form-control" (input)="onUpdateServerName($event)"> -->
+
+<input type="text" class="form-control" [(ngModel)]= "serverName">
+
+<p>{{serverName}}</p>
+<button
+ class="btn btn-primary"
+ [disabled]= "!allowNewServer"
+(click)="onCreateServer()">Add Server</button>
+
+
+<p *ngIf="serverCreated; else noServer">Server was created, server name is {{serverName}}</p>
+<ng-template #noServer>
+<p>
+No server was created!   
+</p> 
+</ng-template>
+
+
+ <p [innerText]= "allowNewServer"></p>
+<p>{{serverCreationStatus}}</p>
+
+<hr>
+<label>Username</label>
+<input type="text" class="form-control" [(ngModel)] ="username">
+<p>{{username}}</p>
+<button
+ class ="btn  btn-primary"
+ [disabled]= "username === ''" 
+ (click)= "username = ''">Reset User</button>
+<app-server *ngFor= "let server of servers">
+    </app-server>
+
+    <!-- <button class = "btn btn-primary" (click) = "showSecret = !showSecret">Display Details</button>
+<p *ngIf ="showSecret">
+    Secret Password = Tune
+</p> -->
+
+<button class = "btn btn-primary" (click) = "onToggle()">Display Details</button>
+<br>
+<p *ngIf ="showSecret">
+    Secret Password = Tune
+</p>
+<div 
+*ngFor = "let item of log;
+let i = index"
+[ngStyle] = "{backgroundColor: i % 2 === 0 ? 'blue': 'green'}"
+[ngClass] = "{'white-text' : item >=5}">
+{{item}}
+</div>
